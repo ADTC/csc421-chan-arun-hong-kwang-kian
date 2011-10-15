@@ -1,0 +1,18 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+64,1,phone,overall,cool,,positive,positive
+64,2,,,like,other,positive,neutral
+64,3,6610,overall,perfect,,positive,positive
+64,4,,overall,pros,:,positive,neutral
+64,5,size,,small,pros:,positive,positive
+64,6,,size,love,pros:,positive,positive
+64,8,color screen,,good,pros:,positive,positive
+64,9,features,,lots of,pros:,positive,positive
+64,9,calender,,works,pros:,positive,positive
+64,10,keys,,guessing,no,negative,positive
+64,11,navigating menu,,easy,super,positive,positive
+64,12,battery,,good,very,positive,positive
+64,13,,overall,cons,:,negative,neutral
+64,14,,quantity,many,not,positive,negative
+64,15,volume key,,hard to,cons',negative,negative
+64,16,pc cable,price,expensive,cons',negative,negative
+64,18,pc software,price,is this how,cons',negative,negative

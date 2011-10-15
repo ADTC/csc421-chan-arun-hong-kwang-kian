@@ -1,0 +1,17 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+9,1,,looks,good looking,,positive,positive
+9,2,,shape,nice,,positive,positive
+9,3,keypad / joystick,,like,,positive,positive
+9,4,use,,easy,,positive,positive
+9,4,,size,small,not,positive,positive
+9,4,,size,big,not,positive,positive
+9,5,screen,size,big,quite,negative,negative
+9,5,color,,65000,,positive,positive
+9,6,camera,,VGA,still,positive,negative
+9,7,open an application,speed,slow,quite,negative,negative
+9,8,open an application,speed,minutes,few,negative,negative
+9,10,,speed,slow,really,negative,negative
+9,11,,phone,popular,very,positive,positive
+9,12,,phone,good,,positive,positive
+9,13,,phone,good enough,not,negative,negative
+9,14,newest color,,cool,quite,positive,positive

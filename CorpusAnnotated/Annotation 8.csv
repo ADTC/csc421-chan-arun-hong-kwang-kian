@@ -1,0 +1,4 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment,
+4,1,,looks,flashy,,positive,negative,
+4,1,feels,,good,,positive,negative,
+4,1,bluetooth connection,,hold,not,negative,negative,

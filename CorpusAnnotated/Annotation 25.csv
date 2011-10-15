@@ -1,0 +1,67 @@
+docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+72,1,phone,,great,,positive,positive
+72,2,phone,,great,,positive,positive
+72,2,,size,tiny,,positive,positive
+72,2,features,,nice,,positive,positive
+72,2,screen,,beautiful,,positive,positive
+72,2,ergonomics,,great,,positive,positive
+72,4,phone,,won,,positive,positive
+72,4,size,,seller,big,positive,positive
+72,5,,size,big,,negative,negative
+72,6,,sound,quiet,,positive,positive
+72,7,,sound,quiet,really,positive,positive
+72,10,,phone,recommend,,positive,positive
+75,1,phone,,ultimate,,positive,positive
+75,2,features,,recommend,,positive,positive
+75,3,phone,,great,,positive,positive
+75,3,features,,wonderful,,postive,positive
+75,4,,phone,impressed,quite,positive,positive
+75,5,,weight,light,very,positive,positive
+75,5,battery life,,long,,positive,positive
+75,7,speakerphone,,powerful,quite,positive,positive
+75,8,feature,,love,simply,positive,positive
+75,9,headset,,sleek,,positive,positive
+75,10,radio,,excellent,,positive,positive
+75,11,headset,,enjoy,more,positive,positive
+75,12,sync feature,,superb,,positive,positive
+75,13,keypad,,hazzles,more,positive,positive
+75,15,,applications,fun,more,positive,positive
+75,16,,applications,enjoy,,positive,positive
+75,17,mms,,well integrated,very,positive,positive
+75,18,camera,,kids,,negative,negative
+75,19,camera,,consider,no,negative,negative
+75,22,features,,excited,quite,positive,positive
+75,23,phone,,recommend,,positive,positive
+78,1,,phone plan,great,,positive,positive
+78,3,size,,small,,positive,positive
+78,3,plan price,,great,,positive,positive
+78,7,problems,,no,,positive,positive
+78,8,,phone,wanting to use,,postive,positive
+78,9,,phone,buy immediately,,positive,positive
+78,10,phone,,great,,positive,positive
+80,5,phone,,coveted,most,positive,positive
+80,6,,phone,elegant,so,positive,positive
+80,7,features,,charm,,positive,positive
+80,7,ringtone,,high quality,,positive,positive
+80,9,phone,,bet,best,positive,positive
+80,10,deal,,great,,positive,positive
+80,11,phone,,give up,not,positive,positive
+80,12,,phone,problems,no,positive,positive
+80,12,phone,,pleased,very,positive,positive
+80,13,features,,numerous,,positive,positive
+80,14,speakerphones,,better,,positive,positive
+80,15,speakerphones,,shocked,,positive,positive
+80,16,sound quality,,excellent,,positive,positive
+80,17,ear piece,,comfortable,,positive,positive
+80,18,phone,,pleased,,positive,positive
+80,18,distortion,,have,not,positive,positive
+80,19,nokia,,won,,positive,positive
+83,2,,phone,complicated,,negative,negative
+86,1,t-mobile,,ruins,,negative,negative
+86,1,phone,,good,,positive,positive
+86,2,phone,,great,,positive,positive
+86,3,features quality,,great,,positive,positive
+86,4,t-mobile,,dissappointed,,negative,negative
+86,5,t-mobile,,brag,,negative,negative
+86,9,phone,,fed up,,negative,negative
+86,10,tri band feature,,attracted,,positive,negative

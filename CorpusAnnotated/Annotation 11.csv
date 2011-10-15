@@ -1,0 +1,15 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+12,1,phone,,buy, not,negative,negative
+12,3,phone,,OK,,positive,positive
+12,3,screen,,nice,really,positive,positive
+12,3,battery life,,great,,positive,positive
+12,3,signal,,decent,,positive,positive
+12,3,applications,,cool,,positive,positive
+12,11,bluetooth,,work, not,negative,negative
+12,12,advertising,,lie,,negative,negative
+12,13,use as Bluetooth modem,,possible,not,negative,negative
+12,19,with older devices,,backwards compatible,not,negative,negative
+12,22,with Palm PDAs,,work,not,negative,negative
+12,26,backup to 3650 safely,,possible,not,negative,negative
+12,39,backup to 3650 without damaging the 3650,,possible,not,negative,negative
+12,40,with the Palm,,work,doesn't,negative,negative

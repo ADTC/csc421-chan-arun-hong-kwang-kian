@@ -1,0 +1,23 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+56,1,menu,,flaws,,negative,negative
+56,1,text message,,couldn't,,negative,negative
+56,2,6610,,upgraded to,,positive,positive
+56,3,menu,,weren't there,,negative,negative
+56,4,email,text message,unchangeable,,negative,negative
+56,5,tech support,,spent,only,negative,negative
+56,5,,text message,same problem,,negative,negative
+56,6,clerk,,insisted,,negative,negative
+56,6,,text message,make it work,couldn’t,positive,negative
+56,7,,clerk,spent,,negative,negative
+56,8,,text message,give up,,negative,negative
+56,8,,,lost,,negative,negative
+56,9,features,,positive,:,positive,neutral
+56,9,sound quality,,good,,positive,positive
+56,9,fm,,excellent,,positive,positive
+56,9,earpiece,,excellent,,positive,positive
+56,10,,features,negative,:,negative,neutral
+56,10,,size,tiny,impossibly,positive,negative
+56,10,operate,,difficult,,negative,negative
+56,10,power button,,visible,barely,positive,negative
+56,11,keys,,visiblility,poor,positive,negative
+56,12,,keys,have to,,negative,negative

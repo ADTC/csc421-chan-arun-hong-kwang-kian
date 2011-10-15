@@ -1,0 +1,25 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+59,1,,overall,pleased,more,positive,positive
+59,2,reviews,,love,,positive,neutral
+59,3,,overall,pros,:,positive,neutral
+59,4,size,,extremely small,,negative,positive
+59,4,size,,fit in,,positive,positive
+59,4,size,,bother,not,negative,positive
+59,5,sound,,excellent,,positive,positive
+59,5,radio,,doubles as,,positive,positive
+59,5,feature,,bored,,negative,positive
+59,6,speakerphone,,loud,,negative,positive
+59,6,features,,nice,like,positive,neutral
+59,6,currency converter,,nice,,positive,positive
+59,6,stopwatch,,nice,,positive,positive
+59,7,web,,nice,,positive,positive
+59,7,wap pages,,wish,,negative,neutral
+59,8,,overall,cons,:,negative,neutral
+59,9,sound (ringtones),,crazy,,negative,negative
+59,9,sound (ringtones),,annoying,,negative,negative
+59,9,sound (ringtones),,only one,,negative,neutral
+59,10,screen,,easily,,positive,negative
+59,10,screen,,but,,negative,positive
+59,11,games,,stink,,negative,negative
+59,11,download games,,can't,,negative,negative
+59,11,download games,,additonal,,positive,negative

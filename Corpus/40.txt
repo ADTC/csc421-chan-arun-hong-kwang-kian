@@ -1,0 +1,3 @@
+[0] Nokia 6600
+[1] The Nokia 6600 is really just a glorified 3650: you know the 3650, those bulbous, formless, big phones a few unfortunate ATT customers are carrying around.
+[2] The Nokia 660 runs the Symbian OS, which works pretty well for most standard phone fare, most of the stuff is not that intuitive, but if you actually learn how to use it all, there's plenty of neat tie-ins.

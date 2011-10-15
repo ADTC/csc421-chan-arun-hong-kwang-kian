@@ -1,0 +1,23 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+53,1,,overall,glad,,positive,positive
+53,3,battery,,lasted,,positive,positive
+53,5,,battery,lasted up to,,positive,positive
+53,6,battery,,affect,,negative,negative
+53,7,battery,,eat up,,negative,negative
+53,8,cover,,scratched,,negative,negative
+53,10,volume level,,good,not,positive,negative
+53,11,,ringtones,easy,not,positive,negative
+53,12,,ringtones,hard,,negative,negative
+53,13,vibration,,top,not,positive,negative
+53,14,,size,teeny,,positive,negative
+53,14,big mechanism,size,,,postive,negative
+53,15,vibration,,use,don't,positive,negative
+53,15,vibration,,feel,,positive,negative
+53,16,feature,,listed,not,positive,negative
+53,17,,feature,no loss,,positive,positive
+53,18,overall,,favorite,,positive,positive
+53,19,battery,,great,,positive,positive
+53,19,size,,perfect,,positive,positive
+53,19,,vibration,quieter,than,positive,negative
+53,20,faceplate,,offer more,,negative,negative
+53,21,silver look,faceplate,bored,,negative,negative

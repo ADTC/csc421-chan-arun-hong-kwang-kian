@@ -1,0 +1,53 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+61,1,,overall,works,,positive,positive
+61,2,,overall,irony,,neutral,neutral
+61,3,,performance,heart broken,,negative,neutral
+61,3,,design,sexy,,positive,neutral
+61,3,,performance,perform,woudn't,positive,negative
+61,3,,performance,perform,,positive,neutral
+61,4,,design,dazzling,not-quite-so..,positive,negative
+61,4,,performance,functional,More,positive,positive
+61,5,features,,short,little,negative,positive
+61,5,,performance,outstanding,,positive,positive
+61,6,reception,,top-notch,,positive,positive
+61,6,sound quality,,top-notch,,positive,positive
+61,7,,reception,unaccustomed,luxury,negative,positive
+61,8,size,,like,,positive,positive
+61,8,weight,,like,,positive,positive
+61,9,conceal,,able,,positive,positive
+61,10,keys,,weird,not,negative,positive
+61,11,keys,,confusing, little,negative,positive
+61,12,,keys,insurmoutable,not,negative,positive
+61,13,screen,,bright,,positive,positive
+61,13,screen,,easy,,positive,positive
+61,13,screen,,nice,,positive,positive
+61,14,mms,,nice,,positive,positive
+61,15,user interface,,inconvenient,little,negative,positive
+61,16,menu options,,taking up,,negative,negative
+61,16,,,has to,,negative,negative
+61,17,,menu options,thumbs down,,negative,negative
+61,18,vibration,,loud,,negative,negative
+61,19,,vibration,so loud,,negative,negative
+61,19,,vibration,well,does't,positive,negative
+61,20,ringer,,so loud,,negative,negative
+61,21,,ringer,good,,positive,positive
+61,22,voiced activated dialing,,miss(ing),,negative,negative
+61,22,2.5mm headset jack,,miss(ing),,negative,negative
+61,23,camera,,like,but,positive,negative
+61,24,overall,,pros,:,positive,neutral
+61,25,design,weight,light,pros:,positive,positive
+61,25,design,,compact,pros:,positive,positive
+61,26,construction,,solid,pros:,positive,positive
+61,27,keypad,,well-backlit,pros:,positive,positive
+61,28,reception,,outstanding,pros:,positive,positive
+61,29,sound quality,,excellent,pros:,positive,positive
+61,30,screen,,bright,pros:,positive,positive
+61,30,screen,,visible,pros:,positive,positive
+61,31,speakerphone,,<no word>,pros:,neutral,positive
+61,32,battery,,long-lasting,pros:,positive,positive
+61,33,overall,,cons,:,negative,neutral
+61,34,user interface,,features,cons:,positive,negative
+61,35,voice activated,,no,,negative,negative
+61,36,caller-id pictures,,option,,positive,negative
+61,36,ringtones,,individualised,,positive,negative
+61,37,headset jack,,proprietary,,positive,negative

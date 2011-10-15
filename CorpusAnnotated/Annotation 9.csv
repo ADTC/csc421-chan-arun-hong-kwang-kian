@@ -1,0 +1,5 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+7,2,major problem,,found,not,positive,positive
+7,3,,phone,recommend,highly,positive,positive
+7,3,camera quality,,great,,positive,positive
+7,3,PDA features,,lots,,positive,positive

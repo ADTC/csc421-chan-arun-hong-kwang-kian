@@ -1,0 +1,15 @@
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+67,1,,quantity,bought,,neutral,positive
+67,2,,quantity,bought,,neutral,positive
+67,3,t-mobile plan,,saves,tons,positive,positive
+67,4,phone,overall,awesome,,positive,positive
+67,5,,battery,have to,hardly,negative,positive
+67,5,reception,,great,,positive,positive
+67,5,customization,,awesome,,positive,positive
+67,5,applications,,awesome,,positive,positive
+67,7,ringtones,pc suite,free,,positive,positive
+67,7,graphics,pc suite,free,,positive,positive
+67,7,games,pc suite,can even,,positive,positive
+67,8,sound quality,,great,,positive,positive
+67,8,,overall,complaints,don’t,positive,positive
+67,8,voice dialing,,miss(ing),,negative,positive

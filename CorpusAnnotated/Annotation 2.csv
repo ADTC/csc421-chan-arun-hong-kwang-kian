@@ -1,0 +1,16 @@
+docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+20,1,reviews,phone,high,,positive ,positive
+20,4,phone,,miracle,such,positive ,positive
+20,5,,phone functionality,monster,TRUE,positive ,positive
+20,7,volume speaker,,low,relatively,negative,negative
+20,8,,phone,bulky,,negative,negative
+20,8,small buttons,,sloppy,,negative,negative
+20,9,,phone application speed,slow,,negative,negative
+20,10,,phone responsiveness,hang,,negative,negative
+20,11,firmware ,,irrelevant,,negative,negative
+20,12,phone,,excels,,positive ,negative
+20,14,phone features,,over-hyped,,negative,negative
+20,14,ergonomics,,average,less,negative,negative
+20,14,phone functions,,average,less,negative,negative
+20,15,phone,,sloppy,,negative,negative
+20,16,rating,,1-star,,negative,negative
