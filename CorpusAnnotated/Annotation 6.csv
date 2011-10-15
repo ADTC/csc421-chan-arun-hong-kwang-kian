@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 31,1,back cover,,difficult,,negative,negative
 31,1,battery life,,long,,positive,negative
 31,2,phone ,phone battery,on,,positive,positive

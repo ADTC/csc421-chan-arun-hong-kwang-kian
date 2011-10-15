@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 26,1,battery life,,decent,,positive,positive
 26,1,call quality,,good,,positive,positive
 26,1,interface,,user-friendly,,positive,positive

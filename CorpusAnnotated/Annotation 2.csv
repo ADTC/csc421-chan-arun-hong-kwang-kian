@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 20,1,reviews,phone,high,,positive ,positive
 20,4,phone,,miracle,such,positive ,positive
 20,5,,phone functionality,monster,TRUE,positive ,positive

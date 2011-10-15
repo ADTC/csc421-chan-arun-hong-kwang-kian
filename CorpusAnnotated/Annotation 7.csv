@@ -1,9 +1,9 @@
-docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment,comments
-1,2,size,,smaller,,positive,positive,Original sentence compares phone with another phone and says other phone is big in size.
-1,3,looks,,nice,,positive,positive,
-1,3,feels,,nice,,positive,positive,
-1,4,features,,full,,positive,positive,"In this context, full means a lot."
-1,5,LCD,,big,,positive,positive,
-1,5,camera quality,,best,,positive,positive,
-1,6,PDA features,,great,,positive,positive,
-1,8,,battery life,days,,positive,positive,
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
+1,2,size,,smaller,,positive,positive
+1,3,looks,,nice,,positive,positive
+1,3,feels,,nice,,positive,positive
+1,4,features,,full,,positive,positive
+1,5,LCD,,big,,positive,positive
+1,5,camera quality,,best,,positive,positive
+1,6,PDA features,,great,,positive,positive
+1,8,,battery life,days,,positive,positive

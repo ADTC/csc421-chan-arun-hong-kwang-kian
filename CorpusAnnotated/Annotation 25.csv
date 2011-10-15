@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 72,1,phone,,great,,positive,positive
 72,2,phone,,great,,positive,positive
 72,2,,size,tiny,,positive,positive

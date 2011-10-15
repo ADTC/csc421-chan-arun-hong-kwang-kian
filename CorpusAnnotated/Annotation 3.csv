@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 23,1,phone,,best,,positive ,positive
 23,3,ring tone,,different,,positive ,positive
 23,4,themes,,great,,positive ,positive

@@ -1,4 +1,4 @@
-docid,paraid,exfeat,imfeat,opword,context,sentiment,ssentiment
+docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 18,0,phone,,big,too,negative,negative
 18,0,phone,,complicated,too,negative,negative
 18,5,ringtones,,beautiful,,positive ,positive
