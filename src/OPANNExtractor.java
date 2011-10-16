@@ -227,13 +227,14 @@ public class OPANNExtractor {
 
 			for(int x=0;x<temp.size();x++)
 			{
-				if(temp.get(x).tag().trim().equalsIgnoreCase("NN")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("NNS")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("NNP")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("NNPS")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("JJ")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("JJR")
-				|| temp.get(x).tag().trim().equalsIgnoreCase("JJS"))
+				String tag = temp.get(x).tag().trim();
+				if(tag.equalsIgnoreCase("NN")
+				|| tag.equalsIgnoreCase("NNS")
+				|| tag.equalsIgnoreCase("NNP")
+				|| tag.equalsIgnoreCase("NNPS")
+				|| tag.equalsIgnoreCase("JJ")
+				|| tag.equalsIgnoreCase("JJR")
+				|| tag.equalsIgnoreCase("JJS"))
 				{
 					sentence = sentence+temp.get(x).toString();
 				}	
