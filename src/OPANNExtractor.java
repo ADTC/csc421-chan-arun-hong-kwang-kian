@@ -7,18 +7,10 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
-
-import edu.stanford.nlp.ling.Sentence;
 import edu.stanford.nlp.ling.TaggedWord;
-import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
-import edu.stanford.nlp.tagger.maxent.TTags;
 
 public class OPANNExtractor {
 
@@ -26,30 +18,37 @@ public class OPANNExtractor {
 	 * @param args
 	 */
 	
+	private static MaxentTagger tagger = null; //avoids reloading of tagger for each corpus file
+	
 	//To access the files: an example of the path is Corpus/0.txt
 	
 	public static void main(String[] args) {
 		
 		//=== For testing purpose ===
-		ArrayList<String> output = generateFileToOPANN("Corpus/4.txt");
-		
-		
-		for(String s:output)
-		{
-			System.out.println(s);
-		}
-		
-		System.out.println("\n\n\n");
-		
-		//Using covertToTaggedWord(ArrayList<String> input);
-		ArrayList<ArrayList<TaggedWord>> tw = convertToTaggedWord(output);
-		for(ArrayList<TaggedWord> s : tw)
-		{
-			for(TaggedWord w : s)
+		int fileNumber = 0;
+		while (fileNumber < 89) {
+			ArrayList<String> output = generateFileToOPANN("Corpus/" + fileNumber + ".txt");
+			
+			
+//			for(String s:output)
+//			{
+//				System.out.println(s);
+//			}
+//			
+//			System.out.println("\n\n\n");
+			System.out.println("\n---------Corpus/" + fileNumber + ".txt---------------------------------------");
+			
+			//Using covertToTaggedWord(ArrayList<String> input);
+			ArrayList<ArrayList<TaggedWord>> tw = convertToTaggedWord(output);
+			for(ArrayList<TaggedWord> s : tw)
 			{
-				System.out.print(w.toString()+" ");
+				for(TaggedWord w : s)
+				{
+					System.out.print(w.toString()+" ");
+				}
+				System.out.println("");
 			}
-			System.out.println("");
+			fileNumber++;
 		}
 		
 	}
@@ -188,7 +187,10 @@ public class OPANNExtractor {
 		ArrayList<ArrayList<TaggedWord>> output = new ArrayList<ArrayList<TaggedWord>>();
 		try {
 			//Loading the tagger model;
-			MaxentTagger tagger = new MaxentTagger("lib/model/bidirectional-distsim-wsj-0-18.tagger");
+//			MaxentTagger tagger = new MaxentTagger("lib/model/bidirectional-distsim-wsj-0-18.tagger");
+			if (tagger==null) {
+				loadTaggerModel(null);
+			}
 			
 			for(String sentence:file)
 			{
@@ -213,6 +215,18 @@ public class OPANNExtractor {
 		
 		
 		return output;
+	}
+	
+	//Method to load tagger model
+	private static void loadTaggerModel(String filePath) {
+		if (filePath==null || !checkIfFileExist(filePath)) {
+			filePath = "lib/model/bidirectional-distsim-wsj-0-18.tagger";
+		}
+		try {
+			tagger = new MaxentTagger(filePath);
+		} catch(Exception e) {
+			tagger = null;
+		}
 	}
 	
 	//Method to extract only the NN JJ in each Sentence
