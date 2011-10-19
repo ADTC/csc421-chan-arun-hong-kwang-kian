@@ -113,7 +113,8 @@ public class CorpusBuilder {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CorpusBuilder corpus = new CorpusBuilder();
-		corpus.init("C:\\Users\\dylan\\workspace\\csc421\\CorpusAnnotated");
+//		corpus.init("C:\\Users\\dylan\\workspace\\csc421\\CorpusAnnotated"); //absolute path, varies from system to system
+		corpus.init("CorpusAnnotated"); //relative path, it will look for CorpusAnnotated folder within the project folder (csc421) wherever the project folder is :)
 	}
 
 }
