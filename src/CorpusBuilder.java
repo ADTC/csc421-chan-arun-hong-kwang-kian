@@ -15,6 +15,7 @@ public class CorpusBuilder {
 	 * 3) Only retrieve, temp[2],temp[4],temp[5],temp[6]
 	 * 4) Store them into a String in this format : "temp[2]:temp[4] temp[5]:temp[6]"
 	 * 5) add the String to a ArrayList
+	 * 6) If any of them happen to be empty, use the value -1
 	 * 
 	 * Explanation
 	 * - temp[2] refers to the explicit feature which we will use to compare the nouns
