@@ -4,6 +4,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,77 +47,46 @@ public class SentimentClassifier {
 		//    moved to other methods once it is ready for deployment.
 		// FastVector is deprecated. Using List and ArrayList instead.
 		
-		//Training Set and Testing Set Arrays
-		//First set is Annotation1.csv, Second set is Annotation10.csv
-		String[][] exfeat     = {{"phone",    "phone",       "ringtones", "screen",   "carrier"  }, {"-1", "-1", "keypad / joystick", "use", "-1", "-1", "screen", "color", "camera", "open an application", "open an application", "-1", "-1", "-1", "-1", "newest color"}};
-		String[][] opword     = {{"big",      "complicated", "beautiful", "quality",  "find"     }, {"good looking", "nice", "like", "easy", "small", "big", "big", "65000", "VGA", "slow", "minutes", "slow", "popular", "good", "good enough", "cool"}};
-		String[][] context    = {{"too",      "too",         "-1",        "high",     "not"      }, {"-1", "-1", "-1", "-1", "not", "not", "quite", "-1", "still", "quite", "few", "really", "very", "-1", "not", "quite"}};
-		String[][] fsentiment = {{"negative", "negative",    "positive",  "positive", "negative" }, {"positive", "positive", "positive", "positive", "positive", "positive", "negative", "positive", "positive", "negative", "negative", "negative", "positive", "positive", "negative", "positive"}};
 		
-		//Control of which set is used to train and which to test
-		int trainIndex = 0;
-		int testIndex = 1;
-		boolean swap = false;
-//		swap = true; /* <============== UNCOMMENT THIS LINE TO SWAP TRAINING SET AND TESTING SET!  */
-		if (swap) {
-			trainIndex = 1;
-			testIndex = 0;
+		//Training set from Corpus
+		CorpusBuilder corpus = new CorpusBuilder();
+		corpus.init("CorpusAnnotated");
+		ArrayList<String> exfeat = corpus.exfeat;
+		ArrayList<String> opword = corpus.opword;
+		ArrayList<String> context = corpus.context;
+		ArrayList<String> fsentiment = corpus.fsentiment;
+		
+		//Testing set from Annotation 1.csv
+		String[] strArray = new String[]{"phone", "phone", "ringtones", "screen", "carrier"};
+		ArrayList<String> exfeatTest = new ArrayList<String>();
+		for(String item : strArray) {
+			exfeatTest.add(item);
+		}
+		strArray = new String[]{"big", "complicated", "beautiful", "quality", "find"};
+		ArrayList<String> opwordTest = new ArrayList<String>();
+		for(String item : strArray) {
+			opwordTest.add(item);
+		}
+		strArray = new String[]{"too", "too", "-1", "high", "not"};
+		ArrayList<String> contextTest = new ArrayList<String>();
+		for(String item : strArray) {
+			contextTest.add(item);
+		}
+		strArray = new String[]{"negative", "negative", "positive", "positive", "negative"};
+		ArrayList<String> fsentimentTest = new ArrayList<String>();
+		for(String item : strArray) {
+			fsentimentTest.add(item);
 		}
 		
 //STEP 1: Express the problem with features
-		String[] extractedSet = null;
 		
-		//exfeat
-		extractedSet = extractSet(exfeat);
-		List<String> alExfeat = new ArrayList<String>(extractedSet.length);
-		for (int i=0; i<extractedSet.length; i++) {
-			alExfeat.add(extractedSet[i]);
-		}
-		Attribute atExfeat = new Attribute("exfeat", alExfeat);
-		
-		//opword
-		extractedSet = extractSet(opword);
-		List<String> alOpword = new ArrayList<String>(extractedSet.length);
-		for (int i=0; i<extractedSet.length; i++) {
-			alOpword.add(extractedSet[i]);
-		}
-		Attribute atOpword = new Attribute("opword", alOpword);
-		
-		//context
-		extractedSet = extractSet(context);
-		List<String> alContext = new ArrayList<String>(extractedSet.length);
-		for (int i=0; i<extractedSet.length; i++) {
-			alContext.add(extractedSet[i]);
-		}
-		Attribute atContext = new Attribute("context", alContext);
-		
-		//fsentiment (class attribute)
-		List<String> alFsentiment = new ArrayList<String>(2);
-		alFsentiment.add("positive");
-		alFsentiment.add("negative");
-		Attribute atFsentiment = new Attribute("fsentiment", alFsentiment);
-		
-		//Declare the feature vector
-		ArrayList<Attribute> alAttributes = new ArrayList<Attribute>(4);
-		alAttributes.add(atExfeat);
-		alAttributes.add(atOpword);
-		alAttributes.add(atContext);
-		alAttributes.add(atFsentiment);
+		ArrayList<Attribute> alAttributes = buildAttributeList(exfeat, opword,
+				context);
 		
 //STEP 2: Train a Classifier
 		//Training set
-		Instances isTrainingSet = new Instances("Rel", alAttributes, exfeat[trainIndex].length);
-		isTrainingSet.setClassIndex(3);
-		
-		//Fill training set with Instances
-		for (int i=0; i<exfeat[trainIndex].length; i++) {
-			Instance instance = new DenseInstance(4);
-			instance.setValue((Attribute)alAttributes.get(0), exfeat[trainIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(1), opword[trainIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(2), context[trainIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(3), fsentiment[trainIndex][i]);
-			isTrainingSet.add(instance);
-		}
+		Instances isTrainingSet = buildInstanceSet(exfeat, opword, context,
+				fsentiment, alAttributes);
 		
 		Classifier cModel = (Classifier)new NaiveBayes();
 		try {
@@ -129,18 +99,8 @@ public class SentimentClassifier {
 		
 //STEP 3: Test the Classifier
 		//Testing set
-		Instances isTestingSet = new Instances("Rel", alAttributes, exfeat[testIndex].length);
-		isTestingSet.setClassIndex(3);
-		
-		//Fill testing set with Instances
-		for (int i=0; i<exfeat[testIndex].length; i++) {
-			Instance instance = new DenseInstance(4);
-			instance.setValue((Attribute)alAttributes.get(0), exfeat[testIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(1), opword[testIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(2), context[testIndex][i]);
-			instance.setValue((Attribute)alAttributes.get(3), fsentiment[testIndex][i]);
-			isTestingSet.add(instance);
-		}
+		Instances isTestingSet = buildInstanceSet(exfeatTest, opwordTest,
+				contextTest, fsentimentTest, alAttributes);
 		
 		//Test the model
 		Evaluation eTest;
@@ -178,31 +138,84 @@ public class SentimentClassifier {
 		//[1] = negative
 //		double[] fDistribution = cModel.distributionForInstance(iUse);
 	}
-	
-	//Extracts and returns a set of Strings (in array) from a given list of Strings (in a 2D array)
-	private static String[] extractSet(String[][] list) {
-		Set<String> set = new HashSet<String>();
-		for (int i=0; i<list.length; i++) {
-			for (int j=0; j<list[i].length; j++) {
-				set.add(list[i][j]);
-			}
-		}
+
+	/**
+	 * @param exfeat
+	 * @param opword
+	 * @param context
+	 * @return
+	 */
+	private static ArrayList<Attribute> buildAttributeList(
+			ArrayList<String> exfeat, ArrayList<String> opword,
+			ArrayList<String> context) {
+		//exfeat
+		List<String> alExfeat = extractSetAsList(exfeat);
+		Attribute atExfeat = new Attribute("exfeat", alExfeat);
 		
-		Object[] setArray = set.toArray();
-		String[] stringSet = new String[setArray.length];
-		for (int i=0; i<setArray.length; i++) {
-			stringSet[i] = (String)setArray[i];
-		}
-			
-		return stringSet;
+		//opword
+		List<String> alOpword = extractSetAsList(opword);
+		Attribute atOpword = new Attribute("opword", alOpword);
+		
+		//context
+		List<String> alContext = extractSetAsList(context);
+		Attribute atContext = new Attribute("context", alContext);
+		
+		//fsentiment (class attribute)
+		List<String> alFsentiment = new ArrayList<String>(2);
+		alFsentiment.add("positive");
+		alFsentiment.add("neutral");
+		alFsentiment.add("negative");
+		Attribute atFsentiment = new Attribute("fsentiment", alFsentiment);
+		
+		//Declare the feature vector
+		ArrayList<Attribute> alAttributes = new ArrayList<Attribute>(4);
+		alAttributes.add(atExfeat);
+		alAttributes.add(atOpword);
+		alAttributes.add(atContext);
+		alAttributes.add(atFsentiment);
+		return alAttributes;
 	}
 
-	public void buildClassifier() {
+	/**
+	 * @param exfeat
+	 * @param opword
+	 * @param context
+	 * @param fsentiment
+	 * @param alAttributes
+	 * @return
+	 */
+	private static Instances buildInstanceSet(ArrayList<String> exfeat,
+			ArrayList<String> opword, ArrayList<String> context,
+			ArrayList<String> fsentiment, ArrayList<Attribute> alAttributes) {
+		Instances instanceSet = new Instances("Rel", alAttributes, exfeat.size());
+		instanceSet.setClassIndex(3);
 		
+		//Fill set with Instances
+		for (int i=0; i<exfeat.size(); i++) {
+			Instance instance = new DenseInstance(4);
+			instance.setValue((Attribute)alAttributes.get(0), exfeat.get(i));
+			instance.setValue((Attribute)alAttributes.get(1), opword.get(i));
+			instance.setValue((Attribute)alAttributes.get(2), context.get(i));
+			instance.setValue((Attribute)alAttributes.get(3), fsentiment.get(i));
+			instanceSet.add(instance);
+		}
+		return instanceSet;
 	}
-	
-	public void classifySentiment() {
-		
+
+	/**
+	 * @param list a given ArrayList of Strings
+	 * @return a set of Strings in a List (no duplicate items)
+	 */
+	private static List<String> extractSetAsList(ArrayList<String> list) {
+		Set<String> set = new HashSet<String>();
+		for (String item:list) {
+			set.add(item); //filters duplicate items
+		}
+		List<String> returnList = new ArrayList<String>(set.size());
+		for (String item:set) {
+			returnList.add(item); //converts to list
+		}
+		return returnList;
 	}
 
 }
