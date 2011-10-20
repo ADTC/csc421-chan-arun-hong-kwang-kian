@@ -14,7 +14,7 @@ docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 75,1,phone,,ultimate,,positive,positive
 75,2,features,,recommend,,positive,positive
 75,3,phone,,great,,positive,positive
-75,3,features,,wonderful,,postive,positive
+75,3,features,,wonderful,,positive,positive
 75,4,,phone,impressed,quite,positive,positive
 75,5,,weight,light,very,positive,positive
 75,5,battery life,,long,,positive,positive
@@ -36,7 +36,7 @@ docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 78,3,size,,small,,positive,positive
 78,3,plan price,,great,,positive,positive
 78,7,problems,,no,,positive,positive
-78,8,,phone,wanting to use,,postive,positive
+78,8,,phone,wanting to use,,positive,positive
 78,9,,phone,buy immediately,,positive,positive
 78,10,phone,,great,,positive,positive
 80,5,phone,,coveted,most,positive,positive
