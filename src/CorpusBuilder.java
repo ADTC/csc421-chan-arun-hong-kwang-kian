@@ -29,7 +29,13 @@ public class CorpusBuilder {
 	 * - temp[6] is the sentiment of the feature which we will use for classification purposes
 	 */
 	
+	//this will *not* be used in SentimentClassifier
 	ArrayList<String> corpusList = new ArrayList<String>();
+	//these four will be used in SentimentClassifier
+	ArrayList<String> exfeat     = new ArrayList<String>();
+	ArrayList<String> opword     = new ArrayList<String>();
+	ArrayList<String> context    = new ArrayList<String>();
+	ArrayList<String> fsentiment = new ArrayList<String>();
 	
 	public void init(String filePath) {
 		FileInputStream fs = null;
@@ -52,6 +58,11 @@ public class CorpusBuilder {
 			}
 			System.out.println();
 			System.out.println("Contents of corpusList: " + corpusList); 
+			System.out.println(exfeat.size() + " - " + exfeat);
+			System.out.println(opword.size() + " - " + opword);
+			System.out.println(context.size() + " - " + context);
+			System.out.println(fsentiment.size() + " - " + fsentiment);
+			
 		} 
 		 catch (IOException e) {
 			e.printStackTrace();
@@ -98,6 +109,10 @@ public class CorpusBuilder {
 					String corpusStr = temp[2].trim() + ":" + temp[4].trim() + ":" + temp[5].trim() + ":" + temp[6].trim();
 					//System.out.println (corpusStr);
 					corpusList.add(corpusStr);
+					exfeat.add(temp[2].trim());
+					opword.add(temp[4].trim());
+					context.add(temp[5].trim());
+					fsentiment.add(temp[6].trim());
 				}
 				
 			}
