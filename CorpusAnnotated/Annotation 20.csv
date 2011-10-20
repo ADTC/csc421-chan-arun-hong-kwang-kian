@@ -10,7 +10,7 @@ docid,paraid,exfeat,imfeat,opword,context,fsentiment,ssentiment
 53,12,,ringtones,hard,,negative,negative
 53,13,vibration,,top,not,positive,negative
 53,14,,size,teeny,,positive,negative
-53,14,big mechanism,size,,,postive,negative
+53,14,big mechanism,size,,,positive,negative
 53,15,vibration,,use,don't,positive,negative
 53,15,vibration,,feel,,positive,negative
 53,16,feature,,listed,not,positive,negative
