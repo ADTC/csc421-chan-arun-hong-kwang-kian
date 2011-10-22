@@ -47,14 +47,16 @@ public class SentimentClassifier {
 		//    moved to other methods once it is ready for deployment.
 		// FastVector is deprecated. Using List and ArrayList instead.
 		
-		
+		SentimentClassifier sc = new SentimentClassifier();
+		SentenceParser sp = new SentenceParser();
+		sp.processDirParser();
 		//Training set from Corpus
-		CorpusBuilder corpus = new CorpusBuilder();
-		corpus.init("CorpusAnnotated");
-		ArrayList<String> exfeat = corpus.exfeat;
-		ArrayList<String> opword = corpus.opword;
-		ArrayList<String> context = corpus.context;
-		ArrayList<String> fsentiment = corpus.fsentiment;
+		//CorpusBuilder corpus = new CorpusBuilder();
+		//corpus.init("CorpusAnnotated");
+		ArrayList<String> exfeat = sp.exfeat;
+		ArrayList<String> opword = sp.opword;
+		ArrayList<String> context = sp.context;
+		ArrayList<String> fsentiment = sp.fsentiment;
 		
 		//Testing set from Annotation 1.csv
 		String[] strArray = new String[]{"phone", "phone", "ringtones", "screen", "carrier"};
@@ -79,13 +81,13 @@ public class SentimentClassifier {
 		}
 		
 //STEP 1: Express the problem with features
-		
-		ArrayList<Attribute> alAttributes = buildAttributeList(exfeat, opword,
-				context);
+
+		ArrayList<Attribute> alAttributes = sp.getAttributeList();
+		//ArrayList<Attribute> alAttributes = sc.buildAttributeList(exfeat, opword,context);
 		
 //STEP 2: Train a Classifier
 		//Training set
-		Instances isTrainingSet = buildInstanceSet(exfeat, opword, context,
+		Instances isTrainingSet = sc.buildInstanceSet(exfeat, opword, context,
 				fsentiment, alAttributes);
 		
 		Classifier cModel = (Classifier)new NaiveBayes();
@@ -99,8 +101,8 @@ public class SentimentClassifier {
 		
 //STEP 3: Test the Classifier
 		//Testing set
-		Instances isTestingSet = buildInstanceSet(exfeatTest, opwordTest,
-				contextTest, fsentimentTest, alAttributes);
+		Instances isTestingSet = sp.getInstanceSet();
+		/*sc.buildInstanceSet(exfeatTest, opwordTest,contextTest, fsentimentTest, alAttributes);*/
 		
 		//Test the model
 		Evaluation eTest;
@@ -145,7 +147,7 @@ public class SentimentClassifier {
 	 * @param context
 	 * @return
 	 */
-	private static ArrayList<Attribute> buildAttributeList(
+	public ArrayList<Attribute> buildAttributeList(
 			ArrayList<String> exfeat, ArrayList<String> opword,
 			ArrayList<String> context) {
 		//exfeat
@@ -184,7 +186,7 @@ public class SentimentClassifier {
 	 * @param alAttributes
 	 * @return
 	 */
-	private static Instances buildInstanceSet(ArrayList<String> exfeat,
+	public Instances buildInstanceSet(ArrayList<String> exfeat,
 			ArrayList<String> opword, ArrayList<String> context,
 			ArrayList<String> fsentiment, ArrayList<Attribute> alAttributes) {
 		Instances instanceSet = new Instances("Rel", alAttributes, exfeat.size());
@@ -206,7 +208,7 @@ public class SentimentClassifier {
 	 * @param list a given ArrayList of Strings
 	 * @return a set of Strings in a List (no duplicate items)
 	 */
-	private static List<String> extractSetAsList(ArrayList<String> list) {
+	public List<String> extractSetAsList(ArrayList<String> list) {
 		Set<String> set = new HashSet<String>();
 		for (String item:list) {
 			set.add(item); //filters duplicate items
