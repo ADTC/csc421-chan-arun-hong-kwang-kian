@@ -97,15 +97,16 @@ public class SentenceParser
 		instanceSet.setClassIndex(3);
 		Instance instance = new DenseInstance(4);
 		int position = 0;
+		String word = "";
 		
 		for(ArrayList<TaggedWord> tagWord : tagSent)
 		{
 			for(TaggedWord tag : tagWord)
 			{
-				if((position = getPosition(tag.value()))!=-1)
+				if((position = getPosition(word = getWord(tag.value())))!=-1)
 				{
 					instance.setValue((Attribute)Attributes.get(0), "phone");
-					instance.setValue((Attribute)Attributes.get(1), tag.value().toLowerCase().trim());
+					instance.setValue((Attribute)Attributes.get(1), word.toLowerCase().trim());
 					instance.setValue((Attribute)Attributes.get(2), context.get(position));
 					instance.setValue((Attribute)Attributes.get(3), fsentiment.get(position));
 					instanceSet.add(instance);
@@ -121,6 +122,15 @@ public class SentenceParser
 			if(word.trim().equalsIgnoreCase(value.trim()))
 				return opword.indexOf(word);
 		return -1;
+	}
+	
+	public String getWord(String value)
+	{
+		String word = "";
+		for(int i = 0;i < value.length();i++)
+			if(Character.isLetter(value.charAt(i)))
+				word += value.charAt(i);
+		return word;
 	}
 
 	public Instances getInstanceSet()
@@ -157,7 +167,7 @@ public class SentenceParser
 		 */
 		
 		/*SentenceParser sp = new SentenceParser();
-		sp.processFileParser("0.txt");
+		sp.processFileParser("25.txt");
 		for(Instance instance:sp.getInstanceSet())
 		{
 			System.out.println(instance.stringValue(1));

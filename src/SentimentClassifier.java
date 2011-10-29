@@ -211,7 +211,7 @@ public class SentimentClassifier {
 	public List<String> extractSetAsList(ArrayList<String> list) {
 		Set<String> set = new HashSet<String>();
 		for (String item:list) {
-			set.add(item); //filters duplicate items
+			set.add(item.toLowerCase().trim()); //filters duplicate items
 		}
 		List<String> returnList = new ArrayList<String>(set.size());
 		for (String item:set) {
