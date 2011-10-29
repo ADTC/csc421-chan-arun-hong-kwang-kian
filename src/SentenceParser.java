@@ -105,7 +105,7 @@ public class SentenceParser
 				if((position = getPosition(tag.value()))!=-1)
 				{
 					instance.setValue((Attribute)Attributes.get(0), "phone");
-					instance.setValue((Attribute)Attributes.get(1), tag.value());
+					instance.setValue((Attribute)Attributes.get(1), tag.value().toLowerCase().trim());
 					instance.setValue((Attribute)Attributes.get(2), context.get(position));
 					instance.setValue((Attribute)Attributes.get(3), fsentiment.get(position));
 					instanceSet.add(instance);
@@ -155,5 +155,12 @@ public class SentenceParser
 		 	TestingSet = sp.getInstanceSet();
 		 	
 		 */
+		
+		/*SentenceParser sp = new SentenceParser();
+		sp.processFileParser("0.txt");
+		for(Instance instance:sp.getInstanceSet())
+		{
+			System.out.println(instance.stringValue(1));
+		}*/
 	}
 }

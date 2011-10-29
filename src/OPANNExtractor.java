@@ -18,14 +18,14 @@ public class OPANNExtractor {
 	 * @param args
 	 */
 	
-	private static MaxentTagger tagger = null; //avoids reloading of tagger for each corpus file
+	private MaxentTagger tagger = null; //avoids reloading of tagger for each corpus file
 	
 	//To access the files: an example of the path is Corpus/0.txt
 	
 	public static void main(String[] args) {
 		
 		//=== For testing purpose ===
-		int fileNumber = 0;
+/*		int fileNumber = 0;
 		while (fileNumber < 89) {
 			ArrayList<String> output = generateFileToOPANN("Corpus/" + fileNumber + ".txt");
 			
@@ -49,13 +49,13 @@ public class OPANNExtractor {
 				System.out.println("");
 			}
 			fileNumber++;
-		}
+		}*/
 		
 	}
 	
 	//Method to generate OPANN
 	//Return null if file did not exist or tagging error
-	public static ArrayList<String> generateFileToOPANN(String filepath)
+	public ArrayList<String> generateFileToOPANN(String filepath)
 	{
 		ArrayList<String> generated = new ArrayList<String>();
 		
@@ -86,7 +86,7 @@ public class OPANNExtractor {
 	}
 	
 	//Method to covert the tagged sentence to tagged word
-	public static ArrayList<ArrayList<TaggedWord>> convertToTaggedWord(ArrayList<String> file)
+	public ArrayList<ArrayList<TaggedWord>> convertToTaggedWord(ArrayList<String> file)
 	{
 		ArrayList<ArrayList<TaggedWord>> generated = new ArrayList<ArrayList<TaggedWord>>();
 		
@@ -111,7 +111,7 @@ public class OPANNExtractor {
 	
 	
 	//Method to check if the file exist
-	private static boolean checkIfFileExist(String filepath)
+	private boolean checkIfFileExist(String filepath)
 	{
 		File f = new File(filepath);
 		return f.exists();
@@ -119,7 +119,7 @@ public class OPANNExtractor {
 	
 	//Method to read in the file
 	//Each element in the list is one sentence
-	private static ArrayList<String> getRawFile(String filepath)
+	private ArrayList<String> getRawFile(String filepath)
 	{
 		ArrayList<String> output = new ArrayList<String>();
 		
@@ -143,7 +143,7 @@ public class OPANNExtractor {
 	
 	//Method to remove other items contain only strings
 	//Only need to remove first word from of each sentence
-	private static ArrayList<String> cleanFileFromCorpus(ArrayList<String> file)
+	private ArrayList<String> cleanFileFromCorpus(ArrayList<String> file)
 	{
 		ArrayList<String> output = new ArrayList<String>();
 		
@@ -182,7 +182,7 @@ public class OPANNExtractor {
 		97.01% correct on WSJ 19-21
 		(89.81% correct on unknown words)
 	 */
-	private static ArrayList<ArrayList<TaggedWord>> addPOSTags(ArrayList<String> file)
+	private ArrayList<ArrayList<TaggedWord>> addPOSTags(ArrayList<String> file)
 	{
 		ArrayList<ArrayList<TaggedWord>> output = new ArrayList<ArrayList<TaggedWord>>();
 		try {
@@ -218,7 +218,7 @@ public class OPANNExtractor {
 	}
 	
 	//Method to load tagger model
-	private static void loadTaggerModel(String filePath) {
+	private void loadTaggerModel(String filePath) {
 		if (filePath==null || !checkIfFileExist(filePath)) {
 			filePath = "lib/model/bidirectional-distsim-wsj-0-18.tagger";
 		}
@@ -230,7 +230,7 @@ public class OPANNExtractor {
 	}
 	
 	//Method to extract only the NN JJ in each Sentence
-	private static ArrayList<String> extractNNJJInEachSentence(ArrayList<ArrayList<TaggedWord>> file)
+	private ArrayList<String> extractNNJJInEachSentence(ArrayList<ArrayList<TaggedWord>> file)
 	{
 		ArrayList<String> output = new ArrayList<String>();
 		for(int i =0;i<file.size();i++)
@@ -242,13 +242,13 @@ public class OPANNExtractor {
 			for(int x=0;x<temp.size();x++)
 			{
 				String tag = temp.get(x).tag().trim();
-				if(tag.equalsIgnoreCase("NN")
-				|| tag.equalsIgnoreCase("NNS")
-				|| tag.equalsIgnoreCase("NNP")
-				|| tag.equalsIgnoreCase("NNPS")
-				|| tag.equalsIgnoreCase("JJ")
-				|| tag.equalsIgnoreCase("JJR")
-				|| tag.equalsIgnoreCase("JJS"))
+				if(tag.toUpperCase().contains("NN")
+				|| tag.toUpperCase().contains("NNS")
+				|| tag.toUpperCase().contains("NNP")
+				|| tag.toUpperCase().contains("NNPS")
+				|| tag.toUpperCase().contains("JJ")
+				|| tag.toUpperCase().contains("JJR")
+				|| tag.toUpperCase().contains("JJS"))
 				{
 					sentence = sentence+temp.get(x).toString();
 				}	

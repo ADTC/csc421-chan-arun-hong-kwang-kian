@@ -29,8 +29,6 @@ public class CorpusBuilder {
 	 * - temp[6] is the sentiment of the feature which we will use for classification purposes
 	 */
 	
-	//this will *not* be used in SentimentClassifier
-	ArrayList<String> corpusList = new ArrayList<String>();
 	//these four will be used in SentimentClassifier
 	ArrayList<String> exfeat     = new ArrayList<String>();
 	ArrayList<String> opword     = new ArrayList<String>();
@@ -41,27 +39,16 @@ public class CorpusBuilder {
 		FileInputStream fs = null;
 		String file;
 		try {
-			
 			File folder = new File(filePath);  /* Folder path */
 			File[] listOfFiles = folder.listFiles();  /* List of files in folder */
-			System.out.println("Number of files in folder : " +  listOfFiles.length);
 			for (int i = 0; i < listOfFiles.length; i++)  {  
 				if (listOfFiles[i].isFile()) /* Is a file */
 				   {
 						file = listOfFiles[i].toString(); /* Get the path */
-						System.out.println(file);
-						
 						fs = new FileInputStream(file); /* File IO Input Stream */
-						System.out.println("Start reading file " + listOfFiles[i].getName());
 						contentReading(fs); /* Read file */
 				    }
 			}
-			System.out.println();
-			System.out.println("Contents of corpusList: " + corpusList); 
-			System.out.println(exfeat.size() + " - " + exfeat);
-			System.out.println(opword.size() + " - " + opword);
-			System.out.println(context.size() + " - " + context);
-			System.out.println(fsentiment.size() + " - " + fsentiment);
 			
 		} 
 		 catch (IOException e) {
@@ -85,9 +72,7 @@ public class CorpusBuilder {
 			String strLine;
 			boolean IsFirstRow = true;
 			while ((strLine = br.readLine()) != null)   {
-				
-				//System.out.println (strLine);
-				
+						
 				if(IsFirstRow){ /* TO IGNORE HEADER ROW */
 					
 					IsFirstRow = false; /* Next Row Not Header Row */
@@ -102,13 +87,7 @@ public class CorpusBuilder {
 						}
 					}
 					
-					/* System.out.println ("Explicit feature : " + temp[2]);
-					System.out.println ("Opinion : " + temp[4] + temp[5]);
-					System.out.println ("Sentiment : " + temp[6]); */
-					
-					String corpusStr = temp[2].trim() + ":" + temp[4].trim() + ":" + temp[5].trim() + ":" + temp[6].trim();
-					//System.out.println (corpusStr);
-					corpusList.add(corpusStr);
+					if(temp.length == 0) continue;
 					exfeat.add(temp[2].trim());
 					opword.add(temp[4].trim());
 					context.add(temp[5].trim());
@@ -126,9 +105,7 @@ public class CorpusBuilder {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		CorpusBuilder corpus = new CorpusBuilder();
-//		corpus.init("C:\\Users\\dylan\\workspace\\csc421\\CorpusAnnotated"); //absolute path, varies from system to system
 		corpus.init("CorpusAnnotated"); //relative path, it will look for CorpusAnnotated folder within the project folder (csc421) wherever the project folder is :)
 	}
 
