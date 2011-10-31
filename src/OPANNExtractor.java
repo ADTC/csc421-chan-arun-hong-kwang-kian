@@ -9,49 +9,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 public class OPANNExtractor {
-
-	/**
-	 * @param args
-	 */
 	
 	private MaxentTagger tagger = null; //avoids reloading of tagger for each corpus file
-	
-	//To access the files: an example of the path is Corpus/0.txt
-	
-	public static void main(String[] args) {
-		
-		//=== For testing purpose ===
-/*		int fileNumber = 0;
-		while (fileNumber < 89) {
-			ArrayList<String> output = generateFileToOPANN("Corpus/" + fileNumber + ".txt");
-			
-			
-//			for(String s:output)
-//			{
-//				System.out.println(s);
-//			}
-//			
-//			System.out.println("\n\n\n");
-			System.out.println("\n---------Corpus/" + fileNumber + ".txt---------------------------------------");
-			
-			//Using covertToTaggedWord(ArrayList<String> input);
-			ArrayList<ArrayList<TaggedWord>> tw = convertToTaggedWord(output);
-			for(ArrayList<TaggedWord> s : tw)
-			{
-				for(TaggedWord w : s)
-				{
-					System.out.print(w.toString()+" ");
-				}
-				System.out.println("");
-			}
-			fileNumber++;
-		}*/
-		
-	}
 	
 	//Method to generate OPANN
 	//Return null if file did not exist or tagging error
@@ -59,33 +23,33 @@ public class OPANNExtractor {
 	{
 		ArrayList<String> generated = new ArrayList<String>();
 		
-		//First check if the file exist
+		//First: Check if the file exist
 		if(!checkIfFileExist(filepath))
 			return null;
 		
-		//Second extract the raw corpus file
+		//Second: Extract the raw corpus file
 		generated = getRawFile(filepath);
 		
-		//Third remove all unnecessary tags from the raw corpus
-		 generated = cleanFileFromCorpus(generated);
+		//Third: Remove all unnecessary tags from the raw corpus
+		generated = cleanFileFromCorpus(generated);
 		
-		 //Fourth POS tag each sentence, may return null
-		 ArrayList<ArrayList<TaggedWord>>tw = addPOSTags(generated);
-		 
-		 //Fifth Select only the JJs and NNs Tags
-		 if(tw !=null)
-		 {
-			 generated = extractNNJJInEachSentence( tw) ;
-		 }
-		 else
-		 {
-			 generated = null;
-		 }
-		 
+		//Fourth: POS tag each sentence, may return null
+		ArrayList<ArrayList<TaggedWord>>tw = addPOSTags(generated);
+		
+		//Fifth: Select only the JJs and NNs Tags
+		if(tw !=null)
+		{
+			generated = extractNNJJInEachSentence( tw) ;
+		}
+		else
+		{
+			generated = null;
+		}
+		
 		return generated;
 	}
 	
-	//Method to covert the tagged sentence to tagged word
+	//Method to convert the tagged sentence to tagged word
 	public ArrayList<ArrayList<TaggedWord>> convertToTaggedWord(ArrayList<String> file)
 	{
 		ArrayList<ArrayList<TaggedWord>> generated = new ArrayList<ArrayList<TaggedWord>>();
@@ -108,7 +72,6 @@ public class OPANNExtractor {
 		 
 		return generated;
 	}
-	
 	
 	//Method to check if the file exist
 	private boolean checkIfFileExist(String filepath)
@@ -186,8 +149,7 @@ public class OPANNExtractor {
 	{
 		ArrayList<ArrayList<TaggedWord>> output = new ArrayList<ArrayList<TaggedWord>>();
 		try {
-			//Loading the tagger model;
-//			MaxentTagger tagger = new MaxentTagger("lib/model/bidirectional-distsim-wsj-0-18.tagger");
+			//Loading the tagger model
 			if (tagger==null) {
 				loadTaggerModel(null);
 			}
@@ -212,7 +174,6 @@ public class OPANNExtractor {
 		} catch (Exception e) {
 			return null;
 		} 
-		
 		
 		return output;
 	}

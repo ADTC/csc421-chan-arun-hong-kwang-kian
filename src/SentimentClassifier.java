@@ -19,52 +19,21 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 public class SentimentClassifier {
-
-	/**
-	 * Chandra's Notes:
-	 * Wait for Hong Ru to complete his corpus builder.
-	 * But you can simulate your classifier as follows.
-	 *        e.g.
-	 *        Classifier Building part
-	 *        =======================
-	 *          Build attribute(data) for opinion
-	 *          Build class attribute which is either positive or negative
-	 *         
-	 *        Initializing data and their corresponding class(positive or negative)
-	 *        =======================
-	 *          Using Hongru's CorpusBuilder, extract the opinion and the fsentiment
-	 *          For each opinion, classify it according to the fsentiment
-	 * 
-	 * Full details on how to use Naive Bayes classifier,
-	 * how to build, train and test the classifier
-	 * can be seen under "docs/Classification Docs"
-	 * where a Weka API manual and a link on how to program
-	 * is provided. (NOTE : the link on how to program is pretty useful)
-	 * 
-	 */
+	
 	public static void main(String[] args) {
-		// Main method is used as a testing and development sandbox.
-		// Source code in main method will be refined, generalized and
-		//    moved to other methods once it is ready for deployment.
-		// FastVector is deprecated. Using List and ArrayList instead.
+		//Note: FastVector is deprecated. Using List and ArrayList instead.
 		
 		SentimentClassifier sc = new SentimentClassifier();
 		SentenceParser sp = new SentenceParser();
 		sp.processDirParser();
-		//Training set from Corpus
-		//CorpusBuilder corpus = new CorpusBuilder();
-		//corpus.init("CorpusAnnotated");
+		
 		ArrayList<String> exfeat = sp.exfeat;
 		ArrayList<String> opword = sp.opword;
 		ArrayList<String> context = sp.context;
 		ArrayList<String> fsentiment = sp.fsentiment;
-		
-//STEP 1: Express the problem with features
 
 		ArrayList<Attribute> alAttributes = sp.getAttributeList();
-		//ArrayList<Attribute> alAttributes = sc.buildAttributeList(exfeat, opword,context);
 		
-//STEP 2: Train a Classifier
 		//Training set
 		Instances isTrainingSet = sc.buildInstanceSet(exfeat, opword, context,
 				fsentiment, alAttributes);
@@ -78,10 +47,8 @@ public class SentimentClassifier {
 			return;
 		}
 		
-//STEP 3: Test the Classifier
 		//Testing set
 		Instances isTestingSet = sp.getInstanceSet();
-		/*sc.buildInstanceSet(exfeatTest, opwordTest,contextTest, fsentimentTest, alAttributes);*/
 		
 		//Test the model
 		Evaluation eTest;
@@ -94,11 +61,10 @@ public class SentimentClassifier {
 			return;
 		}
 		
-		//Print the result
+		//Print the test result summary
 		String strSummary = eTest.toSummaryString();
 		System.out.println(strSummary);
 		
-//STEP 4: Use the classifier
 		NumberFormat fmt = new DecimalFormat("000.00");
 		System.out.println("Positive Neutral Negative\tInstance");
 		
@@ -118,6 +84,7 @@ public class SentimentClassifier {
 		}
 	}
 	
+	//Method to change leading zeroes in a string (usually a formatted number) to spaces
 	private static String changeLeadingZeroToSpace(String num) {
 		String result = "";
 		for (int i=0; i<num.length(); i++) {
@@ -131,12 +98,7 @@ public class SentimentClassifier {
 		return result;
 	}
 
-	/**
-	 * @param exfeat
-	 * @param opword
-	 * @param context
-	 * @return
-	 */
+	//Method to build an attribute list
 	public ArrayList<Attribute> buildAttributeList(
 			ArrayList<String> exfeat, ArrayList<String> opword,
 			ArrayList<String> context) {
@@ -159,7 +121,7 @@ public class SentimentClassifier {
 		alFsentiment.add("negative");
 		Attribute atFsentiment = new Attribute("fsentiment", alFsentiment);
 		
-		//Declare the feature vector
+		//Declare the feature arraylist
 		ArrayList<Attribute> alAttributes = new ArrayList<Attribute>(4);
 		alAttributes.add(atExfeat);
 		alAttributes.add(atOpword);
@@ -168,17 +130,11 @@ public class SentimentClassifier {
 		return alAttributes;
 	}
 
-	/**
-	 * @param exfeat
-	 * @param opword
-	 * @param context
-	 * @param fsentiment
-	 * @param alAttributes
-	 * @return
-	 */
+	//Method to build a set of instances from given attributes
 	public Instances buildInstanceSet(ArrayList<String> exfeat,
 			ArrayList<String> opword, ArrayList<String> context,
 			ArrayList<String> fsentiment, ArrayList<Attribute> alAttributes) {
+		//Create instance set
 		Instances instanceSet = new Instances("Rel", alAttributes, exfeat.size());
 		instanceSet.setClassIndex(3);
 		

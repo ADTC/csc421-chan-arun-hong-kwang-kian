@@ -3,31 +3,16 @@
  *
  */
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class CorpusBuilder {
-
-	/**
-	 * Build Corpus :
-	 * 1) Read each file from CorpusAnnotated
-	 * 2) At each line, use String[] temp = String.split(",") to get the array of Strings
-	 * 3) Only retrieve, temp[2],temp[4],temp[5],temp[6]
-	 * 4) Store them into a String in this format : "temp[2]:temp[4] temp[5]:temp[6]"
-	 * 5) add the String to a ArrayList
-	 * 6) If any of them happen to be empty, use the value -1
-	 * 
-	 * Explanation
-	 * - temp[2] refers to the explicit feature which we will use to compare the nouns
-	 * - temp[4] and temp[5] refers to the opinion which we will use to compare the words of type JJ
-	 * - temp[6] is the sentiment of the feature which we will use for classification purposes
-	 */
 	
-	//these four will be used in SentimentClassifier
 	ArrayList<String> exfeat     = new ArrayList<String>();
 	ArrayList<String> opword     = new ArrayList<String>();
 	ArrayList<String> context    = new ArrayList<String>();
@@ -97,14 +82,9 @@ public class CorpusBuilder {
 			fileInputStream.close(); /* Close file input stream */	
 		}
 		
-		catch (Exception e){//Catch exception if any
+		catch (Exception e){
 			  System.err.println("Error: " + e.getMessage());
 		}
-	}
-	
-	public static void main(String[] args) {
-		CorpusBuilder corpus = new CorpusBuilder();
-		corpus.init("CorpusAnnotated"); //relative path, it will look for CorpusAnnotated folder within the project folder (csc421) wherever the project folder is :)
 	}
 
 }

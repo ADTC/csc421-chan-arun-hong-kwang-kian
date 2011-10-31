@@ -3,15 +3,14 @@
  * 
  */
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
 
-import edu.stanford.nlp.ling.TaggedWord;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-
+import edu.stanford.nlp.ling.TaggedWord;
 
 public class SentenceParser
 {
@@ -48,15 +47,20 @@ public class SentenceParser
 		if(dirCorpus.isDirectory() && dirCorpus.list().length == 0)
 			return;
 		
+		boolean firstTime = true;
+		
 		for(String filename : dirCorpus.list()) 
 		{
 			ArrayList<String> output = OPANN.generateFileToOPANN("Corpus/"+filename);
-			ArrayList<ArrayList<TaggedWord>>temp = OPANN.convertToTaggedWord(output);
-			tagSent.addAll(temp);
-//			break; //only looks at the first file in the list
+			ArrayList<ArrayList<TaggedWord>> temp = OPANN.convertToTaggedWord(output);
+			tagSent.addAll(temp); //sets up sentences from all files in directory
+			if (firstTime) {
+				System.out.print("Reading " + dirCorpus.list().length + " corpus files ");
+				firstTime = false;
+			}
+			System.out.print(".");
 		}
-			
-//		parseData(); //no effect as corpus is not yet built
+		System.out.println(" done.");
 	}
 	
 	public void setUpSentenceByFilename(String filename)
@@ -149,34 +153,24 @@ public class SentenceParser
 		return (Attributes!=null)?Attributes:null;
 	}
 	
-	public static void main(String[] args) 
-	{
-		/*
-		 Implementation style at SentimentClassifier :
-		 
-		 //No need to initialize and call CorpusBuilder.Instead you can do this
-		If using single file
-		   sp.processFileParser(filename);
-		Else if using directory
-		   sp.processDirParser();
-		   
-		ArrayList<String> exfeat = sp.exfeat;
-		ArrayList<String> opword = sp.opword;
-		ArrayList<String> context = sp.context;
-		ArrayList<String> fsentiment = sp.fsentiment;
-		 
-		alAttributes = sp.getAttributeList();
-		
-		if(sp.getInstanceSet()!=null)
-		 	TestingSet = sp.getInstanceSet();
-		 	
-		 */
-		
-		/*SentenceParser sp = new SentenceParser();
-		sp.processFileParser("25.txt");
-		for(Instance instance:sp.getInstanceSet())
-		{
-			System.out.println(instance.stringValue(1));
-		}*/
-	}
+	/*
+	 Implementation style at SentimentClassifier :
+	 
+	 //No need to initialize and call CorpusBuilder.Instead you can do this
+	If using single file
+	   sp.processFileParser(filename);
+	Else if using directory
+	   sp.processDirParser();
+	   
+	ArrayList<String> exfeat = sp.exfeat;
+	ArrayList<String> opword = sp.opword;
+	ArrayList<String> context = sp.context;
+	ArrayList<String> fsentiment = sp.fsentiment;
+	 
+	alAttributes = sp.getAttributeList();
+	
+	if(sp.getInstanceSet()!=null)
+	 	TestingSet = sp.getInstanceSet();
+	 	
+	 */
 }
