@@ -3,6 +3,8 @@
  *
  */
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -96,26 +98,37 @@ public class SentimentClassifier {
 		String strSummary = eTest.toSummaryString();
 		System.out.println(strSummary);
 		
-		//Get and print confusion matrix
-		double[][] cmMatrix = eTest.confusionMatrix();
-		System.out.println("Confusion Matrix: ----------");
-		for (int i=0; i<cmMatrix.length; i++) {
-			for (int j=0; j<cmMatrix[i].length; j++) {
-				System.out.print("\t" + cmMatrix[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println("----------------------------");
-		
 //STEP 4: Use the classifier
-		//Create an Instance (for example iUse)
-		//Then:
-//		iUse.setDataset(isTrainingSet);
+		NumberFormat fmt = new DecimalFormat("000.00");
+		System.out.println("Positive Neutral Negative\tInstance");
 		
-		//Get likelihood (probability)
-		//[0] = positive
-		//[1] = negative
-//		double[] fDistribution = cModel.distributionForInstance(iUse);
+		for (Instance iUse:isTestingSet) {
+			try {
+				double[] fDistribution = cModel.distributionForInstance(iUse);
+				for (double fDist:fDistribution){
+					double fDistPercent = ((double)(int)(fDist*10000))/100;
+					String fDistPercentStr = changeLeadingZeroToSpace(fmt.format(fDistPercent));
+					System.out.print(fDistPercentStr + "%\t");
+				}
+				System.out.println("\t" + iUse.toString().replace(',', '\t'));
+			} catch (Exception e) {
+				System.out.println("Exception generated for instance: " + iUse);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private static String changeLeadingZeroToSpace(String num) {
+		String result = "";
+		for (int i=0; i<num.length(); i++) {
+			if (num.charAt(i) == '0') {
+				result += " ";
+			} else {
+				result += num.substring(i);
+				break;
+			}
+		}
+		return result;
 	}
 
 	/**
