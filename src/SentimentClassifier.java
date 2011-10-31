@@ -57,28 +57,6 @@ public class SentimentClassifier {
 		ArrayList<String> context = sp.context;
 		ArrayList<String> fsentiment = sp.fsentiment;
 		
-		//Testing set from Annotation 1.csv
-		String[] strArray = new String[]{"phone", "phone", "ringtones", "screen", "carrier"};
-		ArrayList<String> exfeatTest = new ArrayList<String>();
-		for(String item : strArray) {
-			exfeatTest.add(item);
-		}
-		strArray = new String[]{"big", "complicated", "beautiful", "quality", "find"};
-		ArrayList<String> opwordTest = new ArrayList<String>();
-		for(String item : strArray) {
-			opwordTest.add(item);
-		}
-		strArray = new String[]{"too", "too", "-1", "high", "not"};
-		ArrayList<String> contextTest = new ArrayList<String>();
-		for(String item : strArray) {
-			contextTest.add(item);
-		}
-		strArray = new String[]{"negative", "negative", "positive", "positive", "negative"};
-		ArrayList<String> fsentimentTest = new ArrayList<String>();
-		for(String item : strArray) {
-			fsentimentTest.add(item);
-		}
-		
 //STEP 1: Express the problem with features
 
 		ArrayList<Attribute> alAttributes = sp.getAttributeList();
@@ -132,7 +110,7 @@ public class SentimentClassifier {
 //STEP 4: Use the classifier
 		//Create an Instance (for example iUse)
 		//Then:
-//		iUse.setDataset(isTraining);
+//		iUse.setDataset(isTrainingSet);
 		
 		//Get likelihood (probability)
 		//[0] = positive

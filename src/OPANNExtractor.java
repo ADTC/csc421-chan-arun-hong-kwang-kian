@@ -242,13 +242,7 @@ public class OPANNExtractor {
 			for(int x=0;x<temp.size();x++)
 			{
 				String tag = temp.get(x).tag().trim();
-				if(tag.toUpperCase().contains("NN")
-				|| tag.toUpperCase().contains("NNS")
-				|| tag.toUpperCase().contains("NNP")
-				|| tag.toUpperCase().contains("NNPS")
-				|| tag.toUpperCase().contains("JJ")
-				|| tag.toUpperCase().contains("JJR")
-				|| tag.toUpperCase().contains("JJS"))
+				if(tag.toUpperCase().startsWith("NN") || tag.toUpperCase().startsWith("JJ"))
 				{
 					sentence = sentence+temp.get(x).toString();
 				}	

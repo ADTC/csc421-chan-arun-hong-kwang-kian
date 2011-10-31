@@ -78,6 +78,7 @@ public class CorpusBuilder {
 				else{
 					
 					String[] temp = strLine.split(",");
+					if(temp.length == 0) continue;
 					
 					for (int i = 0; i < temp.length; i++){
 						if (temp[i].trim().length() == 0){
@@ -85,11 +86,10 @@ public class CorpusBuilder {
 						}
 					}
 					
-					if(temp.length == 0) continue;
-					exfeat.add(temp[2].trim());
-					opword.add(temp[4].trim());
-					context.add(temp[5].trim());
-					fsentiment.add(temp[6].trim());
+					exfeat.add(temp[2].toLowerCase().trim());
+					opword.add(temp[4].toLowerCase().trim());
+					context.add(temp[5].toLowerCase().trim());
+					fsentiment.add(temp[6].toLowerCase().trim());
 				}
 				
 			}

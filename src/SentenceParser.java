@@ -15,7 +15,7 @@ import weka.core.Instances;
 
 public class SentenceParser
 {
-	private ArrayList<ArrayList<TaggedWord>> tagSent;
+	private ArrayList<ArrayList<TaggedWord>> tagSent = new ArrayList<ArrayList<TaggedWord>>();
 	private OPANNExtractor OPANN = new OPANNExtractor();
 	private SentimentClassifier sentClass = new SentimentClassifier();
 	private Instances instanceSet = null;
@@ -51,11 +51,12 @@ public class SentenceParser
 		for(String filename : dirCorpus.list()) 
 		{
 			ArrayList<String> output = OPANN.generateFileToOPANN("Corpus/"+filename);
-			tagSent = OPANN.convertToTaggedWord(output);
-			break;
+			ArrayList<ArrayList<TaggedWord>>temp = OPANN.convertToTaggedWord(output);
+			tagSent.addAll(temp);
+//			break; //only looks at the first file in the list
 		}
 			
-		parseData();
+//		parseData(); //no effect as corpus is not yet built
 	}
 	
 	public void setUpSentenceByFilename(String filename)
@@ -118,7 +119,7 @@ public class SentenceParser
 					instance = new DenseInstance(4);
 				}
 			}
-		}							
+		}
 	}
 	
 	public int getPosition(String value)
