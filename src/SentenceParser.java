@@ -66,7 +66,10 @@ public class SentenceParser
 	public void setUpSentenceByFilename(String filename)
 	{
 		if(!new File("Corpus/"+filename).exists())
+		{
+			System.out.println("The file does not exist!");
 			return;
+		}
 		
 		ArrayList<String> output = OPANN.generateFileToOPANN("Corpus/"+filename);
 		tagSent = OPANN.convertToTaggedWord(output);

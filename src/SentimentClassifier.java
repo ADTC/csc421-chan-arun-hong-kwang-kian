@@ -23,9 +23,21 @@ public class SentimentClassifier {
 	public static void main(String[] args) {
 		//Note: FastVector is deprecated. Using List and ArrayList instead.
 		
+		if(args.length>1)
+			return;
+		
+		String filename = (args.length==1)?args[0]:"";
+		
 		SentimentClassifier sc = new SentimentClassifier();
 		SentenceParser sp = new SentenceParser();
-		sp.processDirParser();
+		
+		if(filename.isEmpty())
+			sp.processDirParser();
+		else
+			sp.processFileParser(filename);
+		
+		if(sp.getInstanceSet()==null)
+			return;
 		
 		ArrayList<String> exfeat = sp.exfeat;
 		ArrayList<String> opword = sp.opword;
