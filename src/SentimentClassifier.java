@@ -3,6 +3,8 @@
  *
  */
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -77,32 +79,49 @@ public class SentimentClassifier {
 		String strSummary = eTest.toSummaryString();
 		System.out.println(strSummary);
 		
-		NumberFormat fmt = new DecimalFormat("000.00");
-		System.out.println("Positive Neutral Negative\tInstance");
+		//Get user's choice
+		int menuChoice = sc.displayMenu();
 		
+		//Display instances and their results
+		NumberFormat fmt = new DecimalFormat("000.00");
 		double classAttributes[] = {0.00,0.00,0.00};
 		int i = 0;
+		String headerText = "Positive Neutral Negative\tResult\t\tInstance";
+		
+		System.out.println(headerText); //print header at top
 		for (Instance iUse:isTestingSet) {
 			try {
 				i = 0;
 				double[] fDistribution = cModel.distributionForInstance(iUse);
-				for (double fDist:fDistribution){
+				//add percentages to classAttributes array
+				for (double fDist:fDistribution) {
 					double fDistPercent = ((double)(int)(fDist*10000))/100;
 					classAttributes[i++] += fDistPercent;
-					String fDistPercentStr = changeLeadingZeroToSpace(fmt.format(fDistPercent));
-					System.out.print(fDistPercentStr + "%\t");
 				}
-				System.out.println("\t" + iUse.toString().replace(',', '\t'));
+				//display the instance
+				if (menuChoice == 1 && sc.getSentiment(fDistribution).equalsIgnoreCase(iUse.toString(3))) {
+					/* do nothing as this is a correctly classified instance
+					   and only incorrectly classified instances are requested */
+				} else {
+					for (double fDist:fDistribution){
+						double fDistPercent = ((double)(int)(fDist*10000))/100;
+						String fDistPercentStr = changeLeadingZeroToSpace(fmt.format(fDistPercent));
+						System.out.print(fDistPercentStr + "%\t");
+					}
+					System.out.println("\t" + sc.getSentiment(fDistribution) + "\t" + iUse.toString().replace(',', '\t'));
+				}
 			} catch (Exception e) {
 				System.out.println("Exception generated for instance: " + iUse);
 				e.printStackTrace();
 			}
 		}
-		displayClassOfTestData(classAttributes,isTestingSet.size(),fmt);
+		System.out.println(headerText); //reprint header at bottom
+		System.out.println();
+		displayClassOfTestData(classAttributes,isTestingSet.size());
 	}
 	//Method to display the sentiment of the document(s)
-	private static void displayClassOfTestData(double fDist[],int size,NumberFormat fmt)
-	{
+	private static void displayClassOfTestData(double fDist[],int size) {
+		NumberFormat fmt = new DecimalFormat("0.00");
 		int position = 0, i = 0;
 		double max = 0.00;
 		String classVal = "";
@@ -112,8 +131,45 @@ public class SentimentClassifier {
 			max = Math.max(val,max);
 		}
 		classVal = (position==0)?"positive":(position==1)?"neutral":(position==2)?"negative":"";
-		System.out.println("The sentiment of the document(s) is "+classVal+" with a rating of "+changeLeadingZeroToSpace(fmt.format(max/size)));
+		System.out.println("The sentiment of the document(s) is "+classVal+" with a rating of "+ changeLeadingZeroToSpace(fmt.format(max/size)) + "%");
 	}
+	
+	//Method to display user input menu
+	private int displayMenu() {
+		int menuChoice;
+		System.out.println ("[1] Display incorrectly classified instances only");
+		System.out.println ("[2] Display all classified instances");
+		System.out.print ("Enter your choice (default is 1): ");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			String menuInput = reader.readLine();
+			menuChoice = Integer.parseInt(menuInput.trim());
+		} catch (Exception e) {
+			System.out.println ("Input error! Displaying incorrectly classified instances...");
+			System.out.println();
+			menuChoice = 1;
+		}
+		System.out.println();
+		return menuChoice;
+	}
+	
+	//Method to judge sentiment from probability distribution
+	private String getSentiment(double[] fDistribution) {
+		String sentiment = "";
+		int biggerOfFirstTwo = 0;
+		if (fDistribution.length == 3) {
+			sentiment = "positive";
+			if (fDistribution[1] > fDistribution[0]) {
+				sentiment = "neutral ";
+				biggerOfFirstTwo = 1;
+			}
+			if (fDistribution[2] > fDistribution[biggerOfFirstTwo]) {
+				sentiment = "negative";
+			}
+		}
+		return sentiment;
+	}
+	
 	//Method to change leading zeroes in a string (usually a formatted number) to spaces
 	private static String changeLeadingZeroToSpace(String num) {
 		String result = "";
