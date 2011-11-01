@@ -68,11 +68,15 @@ public class SentimentClassifier {
 		NumberFormat fmt = new DecimalFormat("000.00");
 		System.out.println("Positive Neutral Negative\tInstance");
 		
+		double classAttributes[] = {0.00,0.00,0.00};
+		int i = 0;
 		for (Instance iUse:isTestingSet) {
 			try {
+				i = 0;
 				double[] fDistribution = cModel.distributionForInstance(iUse);
 				for (double fDist:fDistribution){
 					double fDistPercent = ((double)(int)(fDist*10000))/100;
+					classAttributes[i++] += fDistPercent;
 					String fDistPercentStr = changeLeadingZeroToSpace(fmt.format(fDistPercent));
 					System.out.print(fDistPercentStr + "%\t");
 				}
@@ -82,13 +86,27 @@ public class SentimentClassifier {
 				e.printStackTrace();
 			}
 		}
+		displayClassOfTestData(classAttributes,isTestingSet.size(),fmt);
 	}
-	
+	//Method to display the sentiment of the document(s)
+	private static void displayClassOfTestData(double fDist[],int size,NumberFormat fmt)
+	{
+		int position = 0, i = 0;
+		double max = 0.00;
+		String classVal = "";
+		for(double val : fDist)
+		{
+			position = (Math.max(val,max)==max)?position:i;
+			max = Math.max(val,max);
+		}
+		classVal = (position==0)?"positive":(position==1)?"neutral":(position==2)?"negative":"";
+		System.out.println("The sentiment of the document(s) is "+classVal+" with a rating of "+changeLeadingZeroToSpace(fmt.format(max/size)));
+	}
 	//Method to change leading zeroes in a string (usually a formatted number) to spaces
 	private static String changeLeadingZeroToSpace(String num) {
 		String result = "";
 		for (int i=0; i<num.length(); i++) {
-			if (num.charAt(i) == '0') {
+			if (num.charAt(i) == '0' && num.charAt(i+1)!='.') {
 				result += " ";
 			} else {
 				result += num.substring(i);
