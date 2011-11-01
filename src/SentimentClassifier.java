@@ -117,10 +117,10 @@ public class SentimentClassifier {
 		}
 		System.out.println(headerText); //reprint header at bottom
 		System.out.println();
-		displayClassOfTestData(classAttributes,isTestingSet.size());
+		sc.displayClassOfTestData(classAttributes,isTestingSet.size());
 	}
 	//Method to display the sentiment of the document(s)
-	private static void displayClassOfTestData(double fDist[],int size) {
+	private void displayClassOfTestData(double fDist[],int size) {
 		NumberFormat fmt = new DecimalFormat("0.00");
 		int position = 0, i = 0;
 		double max = 0.00;
