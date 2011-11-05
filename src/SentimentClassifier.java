@@ -85,7 +85,7 @@ public class SentimentClassifier {
 		//Display instances and their results
 		NumberFormat fmt = new DecimalFormat("000.00");
 		double classAttributes[] = {0.00,0.00,0.00};
-		int i = 0;
+		int i = 0,countOfIncorrect = 0;
 		String headerText = "Positive Neutral Negative\tResult\t\tInstance";
 		
 		System.out.println(headerText); //print header at top
@@ -103,6 +103,7 @@ public class SentimentClassifier {
 					/* do nothing as this is a correctly classified instance
 					   and only incorrectly classified instances are requested */
 				} else {
+					countOfIncorrect++;
 					for (double fDist:fDistribution){
 						double fDistPercent = ((double)(int)(fDist*10000))/100;
 						String fDistPercentStr = changeLeadingZeroToSpace(fmt.format(fDistPercent));
@@ -115,6 +116,7 @@ public class SentimentClassifier {
 				e.printStackTrace();
 			}
 		}
+		if(countOfIncorrect==0)System.out.println("There are no incorrectly classified instances");
 		System.out.println(headerText); //reprint header at bottom
 		System.out.println();
 		sc.displayClassOfTestData(classAttributes,isTestingSet.size());
